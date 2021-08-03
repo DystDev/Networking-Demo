@@ -9,10 +9,20 @@ public class NetworkedPlayer : NetworkBehaviour
     [SerializeField]
     private string dispName = "Missing";
 
+    [SyncVar]
+    [SerializeField]
+    private Color dispColor = Color.black;
+
 
     [Server]
     public void SetDispName(string newDispName)
     {
         dispName = newDispName;
+    }
+
+    [Server]
+    public void SetDispColor(Color newDispColor)
+    {
+        dispColor = newDispColor;
     }
 }

@@ -11,8 +11,15 @@ public class NetworkManagerBalls : NetworkManager
 
         NetworkedPlayer player = conn.identity.GetComponent<NetworkedPlayer>();
 
-        player.SetDispName($"Player {(int)Random.Range(10000, 99999)}");
+        player.SetDispName($"Player {Random.Range(10000, 99999)}");
 
-        Debug.Log($"num of active players: {numPlayers}");
+        Color randColor = new Color(
+            Random.Range(0f, 1f),
+            Random.Range(0f, 1f),
+            Random.Range(0f, 1f));
+        
+        player.SetDispColor(randColor);
+        
+
     }
 }
