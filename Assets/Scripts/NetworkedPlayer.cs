@@ -40,7 +40,7 @@ public class NetworkedPlayer : NetworkBehaviour
         
         foreach (string badWord in ProfanityWords.profanityArray)
         {
-            if (word.Contains(badWord) == true)
+            if (word.ToLower().Contains(badWord) == true)
             {
                 Debug.Log("Profanity Detected - Username Denied");
                 return false;
@@ -53,6 +53,7 @@ public class NetworkedPlayer : NetworkBehaviour
         {
             if (allowedLetters.Contains(letter) == false)
             {
+                Debug.Log("Disallowed Letter Detected - Username Denied");
                 return false;
             }
             
@@ -106,7 +107,7 @@ public class NetworkedPlayer : NetworkBehaviour
     [ContextMenu("Set Name")]
     public void ClientSetName()
     {
-        CmdSetDisplayName("Hello"); 
+        CmdSetDisplayName("dababy"); 
     }
 
     #endregion
