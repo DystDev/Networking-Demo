@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -41,25 +42,29 @@ public class NetworkedPlayer : NetworkBehaviour
         {
             if (word.Contains(badWord) == true)
             {
+                Debug.Log("Profanity Detected - Username Denied");
                 return false;
+                
             }
         }
-        foreach (char letter in word)
+        char[] charWord = word.ToCharArray();
+        char[] allowedLetters = AllowedLetters.allowedChars;
+        foreach (char letter in charWord)
         {
-            foreach (char letterInAllowed in AllowedLetters.allowedChars)
+            if (allowedLetters.Contains(letter) == false)
             {
-                if ((letter == letterInAllowed) == false)
-                {
-                    return false;
-                }
+                return false;
             }
+            
         }
         if (word.Contains(" ") == true)
         {
+            Debug.Log("Whitespace Detected - Username Denied");
             return false;
         }
         else if (word.Length < 3 || word.Length > 10)
         {
+            Debug.Log("Incorrect Length Detected - Username Denied");
             return false;
         }
         else { return true; }
@@ -101,7 +106,7 @@ public class NetworkedPlayer : NetworkBehaviour
     [ContextMenu("Set Name")]
     public void ClientSetName()
     {
-        CmdSetDisplayName("Name has been set from here"); 
+        CmdSetDisplayName("Hello"); 
     }
 
     #endregion
